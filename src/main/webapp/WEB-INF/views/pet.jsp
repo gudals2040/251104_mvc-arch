@@ -11,12 +11,14 @@
 <body>
 <%-- view -> model -> pet -> view --%>
 <% List<Pet> petList = repository.findAll(); %>
-<% for (Pet pet : petList) { %>
-<p>
-    이름 : <%= pet.name() %><br>
-    나이 : <%= pet.age() %><br>
-    종류 : <%= pet.category() %>
-</p>
-<% } %>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+    <% for (Pet pet : petList) { %>
+    <p>
+        이름 : <%= pet.name() %><br>
+        나이 : <%= pet.age() %><br>
+        종류 : <%= pet.category() %>
+    </p>
+    <% } %>
+</div>
 </body>
 </html>
