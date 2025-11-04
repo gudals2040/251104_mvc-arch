@@ -1,54 +1,99 @@
-<%--
-    Repository나 POST 관련된 처리 등을 Controller로 로직을 옮기고,
-    View(UI) jsp는 레이아웃이나 디자인 자체에 집중 -> MVC2
---%>
-<%--<%@ page import="org.example.mvc.model.repository.InMemoryPetRepository" %>--%>
 <%@ page import="org.example.mvc.model.entity.Pet" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%-- JSP가 만들어질 때 1번만 선언되게 된다 -> 내부에 있는 petList는 유지 --%>
-<%--<%! PetRepository repository = new PetRepository(); %>--%>
 <html>
 <head>
     <title>반려동물을 소개합니다</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h3 {
+            color: #5a5a5a;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            width: 300px;
+        }
+        form input[type="text"],
+        form input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        form button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #5c67f2;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form button:hover {
+            background-color: #5058e5;
+        }
+        .pet-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .pet-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+        .pet-card p {
+            margin: 0;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-<%-- post 시 처리하는 로직 --%>
-<%--    <%--%>
-<%--        if (request.getMethod().equals("POST")) {--%>
-<%--            System.out.println("POST 요청");--%>
-<%--            // form에서 input으로 넣은 걸 가지고 있음--%>
-<%--            System.out.println(request.getParameter("name"));--%>
-<%--            System.out.println(request.getParameter("age"));--%>
-<%--            System.out.println(request.getParameter("category"));--%>
-<%--            String name = request.getParameter("name");--%>
-<%--            int age = Integer.parseInt(request.getParameter("age")); // String -> int (변환)--%>
-<%--            String category = request.getParameter("category");--%>
-<%--            Pet pet = new Pet(name, age, category);--%>
-<%--            repository.save(pet);--%>
-<%--        }--%>
-<%--    %>--%>
+<h1>반려동물을 소개합니다</h1>
 
-<%-- form --%>
 <form method="post">
-    <h3>새로운 반려동물</h3>
-    이름 : <input type="text" name="name"><br>
-    나이 : <input type="number" name="age"><br>
-    종류 : <input type="text" name="category"><br>
+    <h3>새로운 반려동물 등록</h3>
+    이름 : <input type="text" name="name" required><br>
+    나이 : <input type="number" name="age" required><br>
+    종류 : <input type="text" name="category" required><br>
     <button>등록</button>
 </form>
 
-<%-- view -> model -> pet -> view --%>
-<%--    <% List<Pet> petList = repository.findAll(); %>--%>
-<div style="display: flex; flex-wrap: wrap; gap: 16px">
-    <%--        <% for (Pet pet : petList) { %>--%>
-    <% for (Pet pet : (List<Pet>) request.getAttribute("petList")) { %>
-    <p>
-        이름 : <%= pet.name() %><br>
-        나이 : <%= pet.age() %><br>
-        종류 : <%= pet.category() %>
-    </p>
-    <% } %>
+<div class="pet-list">
+    <%
+        List<Pet> petList = (List<Pet>) request.getAttribute("petList");
+        if (petList != null) {
+            for (Pet pet : petList) {
+    %>
+    <div class="pet-card">
+        <p>
+            <strong>이름:</strong> <%= pet.name() %><br>
+            <strong>나이:</strong> <%= pet.age() %><br>
+            <strong>종류:</strong> <%= pet.category() %>
+        </p>
+    </div>
+    <%
+            }
+        }
+    %>
 </div>
 </body>
 </html>
