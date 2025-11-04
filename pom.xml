@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>251104_mvc-arch</name>
     <packaging>war</packaging>
-d
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>17</maven.compiler.target>
