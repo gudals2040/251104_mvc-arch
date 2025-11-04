@@ -1,4 +1,30 @@
 package org.example.mvc.model.repository;
 
+import org.example.mvc.model.entity.Pet;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class PetRepository {
+    // 데이터를 저장하거나 불러올 수 있는 체계 -> DB 연결할 수 있는 수단
+    private final List<Pet> petList = new ArrayList<>();
+
+    public PetRepository() {
+        petList.add(new Pet("누렁이", 5, "강아지"));
+        petList.add(new Pet("야옹이", 2, "고양이"));
+        petList.add(new Pet("짹짹이", 1, "새"));
+        petList.add(new Pet("개북이", 10, "거북이"));
+        petList.add(new Pet("금붕어", 1, "물고기"));
+        petList.add(new Pet("햄스터", 2, "햄스터"));
+    }
+
+    // findAll (전체 불러오기)
+    public List<Pet> findAll() {
+        return petList;
+    }
+
+    // save (맨 끝에 하나 추가)
+    public void save(Pet pet) {
+        petList.add(pet);
+    }
 }
