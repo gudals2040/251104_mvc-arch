@@ -5,9 +5,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.mvc.model.entity.Pet;
-import org.example.mvc.model.repository.InMemoryPetRepository;
-import org.example.mvc.model.repository.PetRepository;
 import org.example.mvc.service.PetService;
 import org.example.mvc.service.PetServiceImpl;
 
